@@ -46,6 +46,8 @@ Works on Windows, Linux and MacOS.
 * Python version 3.6+
 * [exiftool](https://exiftool.org/)
 * [ffmpeg](https://www.ffmpeg.org/download.html)
+* [Gpxpy](https://pypi.org/project/gpxpy/): python -m pip install gpxpy
+* [Pandas](https://pandas.pydata.org/docs/): python -m pip install pandas
 
 ### Video Requirements
 
@@ -71,6 +73,14 @@ This software will work with most video formats. Whilst it is designed for 360 v
 
 _A note on time. We recommend using `timegps` ([EXIF] `GPSDateTime`) not `timecapture` ([EXIF] `createDate`) unless you are absolutely sure `createDate` is correct. Many 360 stitching tools rewrite `createDate` as datetime of stitching process not the datetime the image was actually captured. This can cause issues when sorting by time (e.g. images might not be stitched in capture order). Therefore, `GPSDateTime` is more likely to represent the true time of capture. [This output shows a good example](https://gitlab.com/snippets/1979531). See all `createDate`'s refer to `2020:04:15 09:14:04` but first `GPSDateTime` is `2020:04:13 15:37:22.444`._
 
+
+* e: Exif executable path (-e)
+
+* f: FFmpeg executable path (-f)
+
+* r: frame_rates (-r)
+
+
 ### Usage
 
 _Note for Windows users_
@@ -89,10 +99,14 @@ _Note for MacOS / Unix users_
 
 Remove the double quotes (`"`) around any directory path shown in the examples. For example `"OUTPUT_1"` becomes `OUTPUT_1`.
 
-**Using a video `"/INPUT/VIDEO_0294.mp4"` extract 1 frame per second (`-r 1`) using the first GPSDateTime value (`-t timegps`) for the first image extracted and output all `.jpg` images to the directory `"OUTPUT_1"`**
 
 ```
-python gf2gv.py -t timegps -r 1 "/INPUT/VIDEO_0294.mp4" "OUTPUT_1"
+python gf2gv.py -t [TIME] -e [EXIF EXECUTABLE PATH] -f [FFMPEG EXECUTABLE PATH] -r [FRAME_RATE] VIDEO_FILE OUTPUT_FRAME_DIRECTORY
+```
+
+
+```
+python gf2gv.py -t timegps -e exiftool.exe -f ffmpeg.exe -r 1 VIDEO_0294.mp4 my_video_frames/
 ```
 
 **Using a video `"/INPUT/VIDEO_0294.mp4"` extract 1 frame every 5 seconds (`-r 0.2`) using the CreateDate value (`-t timecapture`) for the first image extracted and output all `.jpg` images to the directory `"OUTPUT_2"`**
