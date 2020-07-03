@@ -59,8 +59,6 @@ Works on Windows, Linux and MacOS.
 	- `GPSAltitude`
 	- `GPSDateTime` OR (`GPSDateStamp` AND `GPSTimeStamp`) OR `createDate`
 
-This software will work with most video formats. Whilst it is designed for 360 video files, it will work with traditional flat (Cartesian) videos too.
-
 ## Quick start guide
 
 ### Command Line Arguments
